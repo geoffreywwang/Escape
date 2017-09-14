@@ -3,20 +3,19 @@ import Utilities.*;
 
 public class Unit {
     public String name;
-    private Vec2d currentpos, displacement;
+    private Vec2d currentPos, displacement;
     public int cost;
 
-    public Unit(String n, Vec2d pos, int c) {
-        name = n;
-        cost = c;
-        currentpos = pos;
+    public Unit(String name, Vec2d position, int cost) {
+        this.name = name;
+        this.cost = cost;
+        currentPos = position;
     }
 
     public void move() {
-        currentpos.add(displacement);
+        currentPos.add(displacement);
     }
 
-    public void turn(Vec2d dir) {
-        displacement = dir;
+    public void turn(boolean dir) {
     }
 }
