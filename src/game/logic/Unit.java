@@ -1,5 +1,5 @@
-package GameLogic;
-import Utilities.*;
+package game.logic;
+import utilities.*;
 
 public class Unit {
     public String name;
