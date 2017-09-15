@@ -17,10 +17,40 @@ public class Unit {
     }
 
     public void turn(boolean turnRight) {
+        /*
+        (0, 1) down
+        (0, -1) up
+        (1, 0) right
+        (-1, 0) left
+         */
         if(turnRight) {
-
+            if(displacement.x == 0 && displacement.y == -1) {
+                displacement.x = 1;
+                displacement.y = 0;
+            }else if(displacement.x == 1 && displacement.y == 0) {
+                displacement.x = 0;
+                displacement.y = 1;
+            }else if(displacement.x == 0 && displacement.y == 1) {
+                displacement.x = -1;
+                displacement.y = 0;
+            }else if(displacement.x == -1 && displacement.y == 0) {
+                displacement.x = 0;
+                displacement.y = -1;
+            }
         }else {
-
+            if(displacement.x == 0 && displacement.y == -1) {
+                displacement.x = -1;
+                displacement.y = 0;
+            }else if(displacement.x == -1 && displacement.y == 0) {
+                displacement.x = 0;
+                displacement.y = 1;
+            }else if(displacement.x == 0 && displacement.y == 1) {
+                displacement.x = 1;
+                displacement.y = 0;
+            }else if(displacement.x == 1 && displacement.y == 0) {
+                displacement.x = 0;
+                displacement.y = -1;
+            }
         }
     }
 
