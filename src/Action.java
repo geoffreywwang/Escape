@@ -3,7 +3,7 @@
  */
 public class Action {
     private int Bot1;
-
+//kan
     public Action(){
 
     }
