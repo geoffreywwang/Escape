@@ -23,6 +23,11 @@ public class Map {
         Tiles[][] mapArray = new Tiles[width][height];
         Tiles[][] viewableMapArray = new Tiles[width][height];
 
+        for (int row = 0; row < width; row++) {
+            for (int col = 0; col < height; col++) {
+                viewableMapArray[row][col] = Tiles.UNKNOWN;
+            }
+        }
         startTile = x;
         stopTile = y;
 
@@ -32,11 +37,7 @@ public class Map {
     }
 
     public Tiles[][] returner() {
-        for (int row = 0; row < x; row++) {
-            for (int col = 0; col < y; col++) {
 
-            }
-        }
 
 
 //        for (int row = 0; row < x; row++) {
