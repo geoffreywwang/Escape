@@ -16,6 +16,11 @@ public class Unit {
         currentPos.add(displacement);
     }
 
-    public void turn(boolean dir) {
+    public void turn(boolean turnRight) {
+        if(turnRight) {
+            displacement.x = 1;
+        }else {
+            displacement.x = -1;
+        }
     }
 }
