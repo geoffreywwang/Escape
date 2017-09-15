@@ -1,6 +1,6 @@
 package game.logic;
 
-import utilities.Vec2d;
+import Utilities.Vec2d;
 
 public class Map {
     Tiles tiles;
