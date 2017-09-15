@@ -14,6 +14,7 @@ public class Unit {
 
     public void move() {
         currentPos.add(displacement);
+
     }
 
     public void turn(boolean turnRight) {
