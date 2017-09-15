@@ -12,12 +12,4 @@ public class Vec2d {
         x += other.x;
         y += other.y;
     }
-
-    public int getX() {
-        return x;
-    }
-
-    public int getY() {
-        return y;
-    }
 }
