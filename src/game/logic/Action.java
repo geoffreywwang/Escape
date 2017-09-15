@@ -1,3 +1,5 @@
+package game.logic;
+
 /**
  * Created by student on 9/13/17.
  */
