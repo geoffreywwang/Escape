@@ -4,22 +4,22 @@ import game.logic.Action;
 
 import java.util.ArrayList;
 
-/**
- * Created by student on 9/15/17.
- */
-public class Mission {
-    //unit and a list of actions
-    Unit unit;
-    ArrayList<Action> actionArrayList = new ArrayList<Action>();
+import java.util.ArrayList;
 
-    public Mission() {
+public class Mission {
+    private Unit unit;
+    private ArrayList<Action> actions;
+
+    public Mission(Unit unit, ArrayList<Action> actions){
+        this.unit = unit;
+        this.actions = actions;
     }
 
     public Unit getUnit() {
         return unit;
     }
-
-    public ArrayList<Action> getActionArrayList() {
-        return actionArrayList;
+  
+    public ArrayList<Action> getActions() {
+        return actions;
     }
 }

@@ -1,22 +1,22 @@
 package game.logic;
-import game.logic.Unit;
-/**
- * Created by student on 9/15/17.
- */
 public class Action {
-    Unit unit;
-    int moves;
-
-    public Action() {
+    public enum ActionType{
+        TURN_RIGHT, TURN_LEFT, MOVE
     }
 
-    public Unit getUnit() {
-        return unit;
+    private ActionType actionType;
+    private int argument;
+
+    public Action(ActionType actionType, int argument){
+        this.actionType = actionType;
+        this.argument = argument;
     }
 
-    public int getMoves() {
-        return moves;
+    public ActionType getActionType() {
+        return actionType;
     }
 
-
+    public int getArgument() {
+        return argument;
+    }
 }
