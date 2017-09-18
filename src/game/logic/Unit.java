@@ -2,9 +2,11 @@ package game.logic;
 import utilities.*;
 
 public class Unit {
+    public static boolean TURN_RIGHT = true, TURN_LEFT = false;
+  
     private String name;
     private Vec2d currentPos, displacement;
-    private int cost;
+    public int cost;
 
     public Unit(String name, Vec2d position, int cost) {
         this.name = name;
@@ -14,6 +16,11 @@ public class Unit {
 
     public void move() {
         currentPos.add(displacement);
+    }
+
+    public Vec2d getCurrentPos() {
+
+        return currentPos;
     }
 
     public void turn(boolean turnRight) {
