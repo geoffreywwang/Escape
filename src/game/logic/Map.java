@@ -42,22 +42,21 @@ public class Map {
     public Tiles[][] update(Mission mission){
 
 
-        ArrayList<Action> actionList = mission.getActionArrayList();
+        ArrayList<Action> actionList = mission.getActions();
         unit = mission.getUnit();
         boolean actionFullStop = false;
 
         for (int actionListNumber = 0; actionListNumber < actionList.size(); actionListNumber++) {
 
-            for (int steps = 0; steps < actionList.get(actionListNumber).getMoves(); steps++) {
-                switch (actionList.get(actionListNumber).getAction()) {
-                    case TURN_RIGHT;
+                switch (actionList.get(actionListNumber).getActionType()) {
+                    case TURN_RIGHT:
                         unit.turn(Unit.TURN_RIGHT); //turn right is true
                             break;
                     case TURN_LEFT:
                         unit.turn(Unit.TURN_LEFT); //turn right is true
                             break;
                     case MOVE:
-                        for (int moves = 0; moves < unit.getArgument(); moves++) {
+                        for (int moves = 0; moves < actionList.get(actionListNumber).getArgument(); moves++) { //traverse through movements
                             unit.move();
                             int x = unit.getCurrentPos().x;
                             int y = unit.getCurrentPos().y;
@@ -76,18 +75,14 @@ public class Map {
                 if (actionFullStop) {
                     break;
                 }
-            }
 
-            if (actionFullStop) {
-                break;
-            }
 
         }
 
 
-        int x = currentPosition.x;
-        int y = currentPosition.y;
-        viewableMapArray[x][y] = mapArray[x][y]; /*the maps haven't been generated yet*/
+//        int x = currentPosition.x;
+//        int y = currentPosition.y;
+//        viewableMapArray[x][y] = mapArray[x][y]; /*the maps haven't been generated yet*/
 
         return viewableMapArray;
     }

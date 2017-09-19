@@ -18,10 +18,6 @@ public class Unit {
         currentPos.add(displacement);
     }
 
-    public Vec2d getCurrentPos() {
-
-        return currentPos;
-    }
 
     public void turn(boolean turnRight) {
         /*
