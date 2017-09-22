@@ -2,7 +2,7 @@ package game.logic;
 
 public class Action {
     public enum ActionType{
-        TURN, MOVE
+        TURN_RIGHT, TURN_LEFT, MOVE
     }
 
     private ActionType actionType;
