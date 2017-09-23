@@ -3,25 +3,7 @@ import game.logic.*;
 import java.util.ArrayList;
 
 public class LogicUtil {
-    public static void main(String[] args) {
-        Map.Tiles[][] def = new Map.Tiles[][] {
-                {Map.Tiles.BLOCK,Map.Tiles.BLOCK,Map.Tiles.BLOCK,Map.Tiles.BLOCK,Map.Tiles.BLOCK,Map.Tiles.BLOCK},
-                {Map.Tiles.BLOCK,Map.Tiles.BLOCK,Map.Tiles.BLOCK,Map.Tiles.BLOCK,Map.Tiles.BLOCK,Map.Tiles.BLOCK},
-                {Map.Tiles.BLOCK,Map.Tiles.BLOCK,Map.Tiles.BLOCK,Map.Tiles.BLOCK,Map.Tiles.BLOCK,Map.Tiles.BLOCK},
-                {Map.Tiles.BLOCK,Map.Tiles.BLOCK,Map.Tiles.BLOCK,Map.Tiles.BLOCK,Map.Tiles.BLOCK,Map.Tiles.BLOCK},
-                {Map.Tiles.BLOCK,Map.Tiles.BLOCK,Map.Tiles.BLOCK,Map.Tiles.BLOCK,Map.Tiles.BLOCK,Map.Tiles.BLOCK},
-                {Map.Tiles.BLOCK,Map.Tiles.BLOCK,Map.Tiles.BLOCK,Map.Tiles.BLOCK,Map.Tiles.BLOCK,Map.Tiles.BLOCK}
-        };
-        Map.Tiles[][] map = generateMap(def);
-        for(int row = 0; row < map.length; row++) {
-            for(int col = 0; col < map[0].length; col++) {
-                System.out.print(map[row][col] + ", ");
-            }
-            System.out.println();
-        }
-    }
-
-    public static Map.Tiles[][] generateMap(Map.Tiles[][] map) {
+    public Map.Tiles[][] generateMap(Map.Tiles[][] map) {
         ArrayList<Wall> walls = new ArrayList<>();
         int randstart = (int)(Math.random() * map.length);
         map[randstart][0] = Map.Tiles.START;
@@ -78,7 +60,7 @@ public class LogicUtil {
         return map;
     }
 
-    static class Wall {
+    public class Wall {
         int x, y;
         Wall(int x, int y) {
             this.x = x;
