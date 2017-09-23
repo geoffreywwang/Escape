@@ -3,9 +3,64 @@ import game.logic.*;
 import java.util.ArrayList;
 
 public class LogicUtil {
+    public static void main(String[] args) {
+        Map.Tiles[][] arr1 = new Map.Tiles[][] {
+                {Map.Tiles.BLOCK, Map.Tiles.BLOCK, Map.Tiles.BLOCK},
+                {Map.Tiles.PATH, Map.Tiles.BLOCK, Map.Tiles.PATH},
+                {Map.Tiles.BLOCK, Map.Tiles.BLOCK, Map.Tiles.BLOCK},
+                {Map.Tiles.PATH, Map.Tiles.BLOCK, Map.Tiles.PATH},
+                {Map.Tiles.BLOCK, Map.Tiles.BLOCK, Map.Tiles.BLOCK},
+                {Map.Tiles.PATH, Map.Tiles.BLOCK, Map.Tiles.PATH},
+        };
+        Map.Tiles[][] arr2 = new Map.Tiles[][] {
+                {Map.Tiles.PATH, Map.Tiles.BLOCK, Map.Tiles.PATH},
+                {Map.Tiles.BLOCK, Map.Tiles.BLOCK, Map.Tiles.BLOCK},
+                {Map.Tiles.PATH, Map.Tiles.BLOCK, Map.Tiles.PATH},
+                {Map.Tiles.BLOCK, Map.Tiles.BLOCK, Map.Tiles.BLOCK},
+                {Map.Tiles.PATH, Map.Tiles.BLOCK, Map.Tiles.PATH},
+                {Map.Tiles.BLOCK, Map.Tiles.BLOCK, Map.Tiles.BLOCK},
+        };
+        Map.Tiles[][] merged = merge(arr1, arr2, false);
+        for(int row = 0; row < merged.length; row++) {
+            for(int col = 0; col < merged[0].length; col++) {
+                System.out.print(merged[row][col] + ", ");
+            }
+            System.out.println();
+        }
+    }
 
     public void generateMap() {
 
+    }
+
+    public static Map.Tiles[][] merge(Map.Tiles[][] first, Map.Tiles[][] second, boolean horizontal) {
+        if(horizontal) {
+            Map.Tiles[][] ret = new Map.Tiles[Math.max(first.length, second.length)][first[0].length + second[0].length];
+            for(int row = 0; row < first.length; row++) {
+                for(int col = 0; col < first[0].length; col++) {
+                    ret[row][col] = first[row][col];
+                }
+            }
+            for(int row = 0; row < second.length; row++) {
+                for(int col = 0; col < second[0].length; col++) {
+                    ret[row][first[0].length + col] = second[row][col];
+                }
+            }
+            return ret;
+        }else {
+            Map.Tiles[][] ret = new Map.Tiles[first.length + second.length][Math.max(first[0].length, second[0].length)];
+            for(int row = 0; row < first.length; row++) {
+                for(int col = 0; col < first[0].length; col++) {
+                    ret[row][col] = first[row][col];
+                }
+            }
+            for(int row = 0; row < second.length; row++) {
+                for(int col = 0; col < second[0].length; col++) {
+                    ret[first.length + row][col] = second[row][col];
+                }
+            }
+            return ret;
+        }
     }
 
     public ArrayList<Map.Tiles[][]> split(Map.Tiles[][] array, boolean horizontal, int index) {
