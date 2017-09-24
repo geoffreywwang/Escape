@@ -3,7 +3,13 @@ import game.logic.*;
 import java.util.ArrayList;
 
 public class LogicUtil {
-    public Map.Tiles[][] generateMap(Map.Tiles[][] map) {
+    public static Map.Tiles[][] generateMap(int width, int height) {
+        Map.Tiles[][] map = new Map.Tiles[width][height];
+        for(int row = 0; row < width; row++) {
+            for(int col = 0; col < height; col++) {
+                map[row][col] = Map.Tiles.BLOCK;
+            }
+        }
         ArrayList<Wall> walls = new ArrayList<>();
         int randstart = (int)(Math.random() * map.length);
         map[randstart][0] = Map.Tiles.START;
@@ -39,16 +45,6 @@ public class LogicUtil {
                 }
             }
             walls.remove(chosen);
-
-            /*
-            for(int row = 0; row < map.length; row++) {
-                for(int col = 0; col < map[0].length; col++) {
-                    System.out.print(map[row][col] + ", ");
-                }
-                System.out.println();
-            }
-            System.out.println();
-            */
         }
 
         int randend = (int)(Math.random() * map.length);
@@ -60,7 +56,25 @@ public class LogicUtil {
         return map;
     }
 
-    public class Wall {
+    public static void displayMap(Map.Tiles[][] map) {
+        for(int row = 0; row < map.length; row++) {
+            for(int col = 0; col < map[0].length; col++) {
+                if(map[row][col] == Map.Tiles.BLOCK) {
+                    System.out.print("B ");
+                }else if(map[row][col] == Map.Tiles.PATH) {
+                    System.out.print("P ");
+                }else if(map[row][col] == Map.Tiles.START) {
+                    System.out.print("S ");
+                }else {
+                    System.out.print("E ");
+                }
+            }
+            System.out.println();
+        }
+        System.out.println();
+    }
+
+    public static class Wall {
         int x, y;
         Wall(int x, int y) {
             this.x = x;
