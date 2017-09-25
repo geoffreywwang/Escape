@@ -2,6 +2,8 @@ package utilities;
 import game.logic.*;
 import java.util.ArrayList;
 
+import game.logic.Map;
+
 public class LogicUtil {
     public static Map.Tiles[][] generateMap(int width, int height) {
         Map.Tiles[][] map = new Map.Tiles[width][height];
