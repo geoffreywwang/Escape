@@ -1,12 +1,19 @@
 package game.logic;
 
 import utilities.Vec2d;
+import game.logic.Mission;
+import game.logic.Action;
+import game.logic.Unit;
+
+import javax.swing.*;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 
 public class Map {
     Tiles tiles;
     Tiles[][] mapArray;
     Tiles[][] viewableMapArray;
-
+    Unit unit;
     public Vec2d startTile;
     Vec2d stopTile;
     int x;
@@ -30,39 +37,62 @@ public class Map {
 
     }
 
-    public Tiles[][] returner() {
 
 
-
-//        for (int row = 0; row < x; row++) {
-//            for (int col = 0; col < y; col++) {
-//                if (viewableMapArray[row][col] != Tiles.UNKNOWN){//true means that you can see through the cloud
-//                    tilesArray[row][col] = mapArray[row][col];
-//                } else {
-//                    tilesArray[row][col] = Tiles.UNKNOWN;
-//                }
-//            }
-//        }
+    public Tiles[][] update(Mission mission){
 
 
-//        tilesArray[startTile.x][startTile.y] = mapArray[startTile.x][startTile.y];
-//        tilesArray[stopTile.x][stopTile.y] = mapArray[stopTile.x][stopTile.y];
-//
-//
-//        return tilesArray;
+        ArrayList<Action> actionList = mission.getActions();
+        unit = mission.getUnit();
+        boolean actionFullStop = false;
+
+        for (int actionListNumber = 0; actionListNumber < actionList.size(); actionListNumber++) {
+
+                switch (actionList.get(actionListNumber).getActionType()) {
+                    case TURN_RIGHT:
+                        unit.turn(Unit.TURN_RIGHT); //turn right is true
+                            break;
+                    case TURN_LEFT:
+                        unit.turn(Unit.TURN_LEFT); //turn right is true
+                            break;
+                    case MOVE:
+                        for (int moves = 0; moves < actionList.get(actionListNumber).getArgument(); moves++) { //traverse through movements
+                            unit.move();
+                            int x = unit.getCurrentPos().x;
+                            int y = unit.getCurrentPos().y;
+                            if (mapArray[x][y] == Tiles.BLOCK) {
+                                viewableMapArray[x][y] = Tiles.BLOCK;
+                                actionFullStop = true;
+                                break;
+
+                            } else {
+                                viewableMapArray[x][y] = Tiles.PATH;
+                            }
+
+                        }
+                            break;
+                }
+                if (actionFullStop) {
+                    break;
+                }
+
+
+        }
+
+
+//        int x = currentPosition.x;
+//        int y = currentPosition.y;
+//        viewableMapArray[x][y] = mapArray[x][y]; /*the maps haven't been generated yet*/
+
         return viewableMapArray;
     }
 
-    public void update(Mission x){
-
-
+    public Tiles[][] getViewableMapArray() {
+        return viewableMapArray;
     }
 
-
-
-
     public enum Tiles {
-        PATH, BLOCK, UNKNOWN, START, STOP
+        PATH, BLOCK, UNKNOWN, START, END
     }
 
 

@@ -1,5 +1,4 @@
 package game.logic;
-
 public class Action {
     public enum ActionType{
         TURN_RIGHT, TURN_LEFT, MOVE
