@@ -26,7 +26,7 @@ public class Interpreter {
         if(method.equals("move")){
             return new Action(Action.ActionType.MOVE,Integer.parseInt(value));
         }else if(method.equals("turn")){
-            if(Boolean.parseBoolean(value)==true) {
+            if(value.equals("right")) {
                 return new Action(Action.ActionType.TURN_RIGHT, -1);
             } else{
                 return new Action(Action.ActionType.TURN_LEFT, -1);
@@ -36,11 +36,13 @@ public class Interpreter {
         return null;
 
     }
-    public static Mission parseScript( String script){
+    public static Mission parseScript(Vec2d vec, String script, int cost){
         ArrayList<Action> actions = new ArrayList<>();
         String[] arr = script.split("\\\n");
         String[] command = arr[0].split(" ");
-        Unit unit = new Unit(command[1], new Vec2d(0,0), 1);
+        vec= new Vec2d(0,0);
+        cost = 1;
+        Unit unit = new Unit(command[1], vec, cost);
         for (int i = 1; i < arr.length; i++) {
             actions.add(parseLine(arr[i]));
 
