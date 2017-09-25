@@ -26,7 +26,7 @@ public class Interpreter {
         if(method.equals("move")){
             return new Action(Action.ActionType.MOVE,Integer.parseInt(value));
         }else if(method.equals("turn")){
-            if(Boolean.parseBoolean(value)==true) {
+            if(value.equals("right")) {
                 return new Action(Action.ActionType.TURN_RIGHT, -1);
             } else{
                 return new Action(Action.ActionType.TURN_LEFT, -1);
