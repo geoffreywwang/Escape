@@ -92,7 +92,7 @@ public class Map {
     }
 
     public enum Tiles {
-        PATH, BLOCK, UNKNOWN, START, END
+        PATH, BLOCK, UNKNOWN, START, STOP
     }
 
 

@@ -6,10 +6,6 @@ import game.logic.Mission;
 import game.logic.Unit;
 
 import java.util.ArrayList;
-
-/**
- * Created by student on 9/18/17.
- */
 public class Interpreter {
 
     //converts in the format: unit.move(3);
@@ -21,7 +17,6 @@ public class Interpreter {
         String[] command = arr[1].split("\\(");   //["move", "3);"]
         String method = command[0];
         String value = command[1].split("\\)")[0];
-
 
         if(method.equals("move")){
             return new Action(Action.ActionType.MOVE,Integer.parseInt(value));
