@@ -1,27 +1,21 @@
 package game.logic;
 
-import utilities.Vec2d;
+import utilities.*;
 import game.logic.Mission;
 import game.logic.Action;
 import game.logic.Unit;
 
-import javax.swing.*;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Map {
-    Tiles tiles;
-    Tiles[][] mapArray;
-    Tiles[][] viewableMapArray;
-    Unit unit;
+    private Tiles[][] mapArray, viewableMapArray;
+    private Unit unit;
     public Vec2d startTile;
-    Vec2d stopTile;
-    int x;
-    int y;
-    int mapSize = 100;
+    private Vec2d stopTile;
+    private int x, y;
 
-    public Map(int width, int height, Vec2d x, Vec2d y) {
-        Tiles[][] mapArray = new Tiles[width][height];
+    public Map(int width, int height) {
+        Tiles[][] mapArray = LogicUtil.generateMap(width, height);
         Tiles[][] viewableMapArray = new Tiles[width][height];
 
         for (int row = 0; row < width; row++) {
@@ -29,19 +23,22 @@ public class Map {
                 viewableMapArray[row][col] = Tiles.UNKNOWN;
             }
         }
-        startTile = x;
-        stopTile = y;
+
+        for(int row = 0; row < width; row++) {
+            for(int col = 0; col < height; col++) {
+                if(mapArray[row][col] == Tiles.START) {
+                    startTile = new Vec2d(row, col);
+                }else if(mapArray[row][col] == Tiles.STOP) {
+                    stopTile = new Vec2d(row, col);
+                }
+            }
+        }
 
         this.x = width;
         this.y = height;
-
     }
 
-
-
     public Tiles[][] update(Mission mission){
-
-
         ArrayList<Action> actionList = mission.getActions();
         unit = mission.getUnit();
         boolean actionFullStop = false;
@@ -78,12 +75,6 @@ public class Map {
 
 
         }
-
-
-//        int x = currentPosition.x;
-//        int y = currentPosition.y;
-//        viewableMapArray[x][y] = mapArray[x][y]; /*the maps haven't been generated yet*/
-
         return viewableMapArray;
     }
 
