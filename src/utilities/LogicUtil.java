@@ -53,7 +53,7 @@ public class LogicUtil {
         while(map[randend][map[0].length - 1] != Map.Tiles.PATH) {
             randend = (int)(Math.random() * map.length);
         }
-        map[randend][map[0].length - 1] = Map.Tiles.END;
+        map[randend][map[0].length - 1] = Map.Tiles.STOP;
 
         return map;
     }
@@ -62,9 +62,9 @@ public class LogicUtil {
         for(int row = 0; row < map.length; row++) {
             for(int col = 0; col < map[0].length; col++) {
                 if(map[row][col] == Map.Tiles.BLOCK) {
-                    System.out.print("B ");
+                    System.out.print("X ");
                 }else if(map[row][col] == Map.Tiles.PATH) {
-                    System.out.print("P ");
+                    System.out.print("  ");
                 }else if(map[row][col] == Map.Tiles.START) {
                     System.out.print("S ");
                 }else {
