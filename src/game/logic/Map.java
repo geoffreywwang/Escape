@@ -16,6 +16,8 @@ public class Map {
     private Vec2d stopTile;
     private int x, y;
 
+
+
     public Map(int width, int height) {
         Tiles[][] mapArray = LogicUtil.generateMap(width, height);
         Tiles[][] viewableMapArray = new Tiles[width][height];
@@ -40,10 +42,15 @@ public class Map {
         this.y = height;
     }
 
-    public Tiles[][] update(Mission mission){
+    public ArrayList<Vec2d> update(Mission mission){
+
+
         ArrayList<Action> actionList = mission.getActions();
         unit = mission.getUnit();
         boolean actionFullStop = false;
+        ArrayList<Vec2d> coorList = new ArrayList<Vec2d>();
+
+        coorList.add(unit.getCurrentPos());
 
         for (int actionListNumber = 0; actionListNumber < actionList.size(); actionListNumber++) {
 
@@ -56,12 +63,7 @@ public class Map {
                             break;
                     case MOVE:
                         for (int moves = 0; moves < actionList.get(actionListNumber).getArgument(); moves++) { //traverse through movements
-
-
-
                             unit.move();
-
-
                             if (unit.getCurrentPos().row >= mapArray.length) {
                                 break;
                             } else if (unit.getCurrentPos().col <= -1) {
@@ -71,20 +73,14 @@ public class Map {
                             } else if (unit.getCurrentPos().row <= -1) {
                                 break;
                             }
-
-
-
-
-
+                            coorList.add(unit.getCurrentPos());
                             int col = unit.getCurrentPos().col;
                             int row = unit.getCurrentPos().row;
+
                             if (mapArray[row][col] == Tiles.BLOCK) {
-                                viewableMapArray[row][col] = Tiles.BLOCK;
                                 actionFullStop = true;
                                 break;
 
-                            } else {
-                                viewableMapArray[row][col] = Tiles.PATH;
                             }
 
 
@@ -98,10 +94,13 @@ public class Map {
                 if (actionFullStop) {
                     break;
                 }
-
-
         }
-        return viewableMapArray;
+
+        return coorList;
+    }
+
+    public void viewableMapSet(Vec2d vec2d){
+        viewableMapArray[vec2d.row][vec2d.col] = mapArray[vec2d.row][vec2d.col];
     }
 
     public Tiles[][] getViewableMapArray() {
