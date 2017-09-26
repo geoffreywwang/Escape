@@ -19,17 +19,17 @@ public class Map {
 
 
     public Map(int width, int height) {
-        Tiles[][] mapArray = LogicUtil.generateMap(width, height);
-        Tiles[][] viewableMapArray = new Tiles[width][height];
+        Tiles[][] mapArray = LogicUtil.generateMap(height, width);
+        Tiles[][] viewableMapArray = new Tiles[height][width];
 
-        for (int row = 0; row < width; row++) {
-            for (int col = 0; col < height; col++) {
+        for (int row = 0; row < height; row++) {
+            for (int col = 0; col < width; col++) {
                 viewableMapArray[row][col] = Tiles.UNKNOWN;
             }
         }
 
-        for(int row = 0; row < width; row++) {
-            for(int col = 0; col < height; col++) {
+        for(int row = 0; row < height; row++) {
+            for(int col = 0; col < width; col++) {
                 if(mapArray[row][col] == Tiles.START) {
                     startTile = new Vec2d(row, col);
                 }else if(mapArray[row][col] == Tiles.STOP) {
@@ -38,8 +38,8 @@ public class Map {
             }
         }
 
-        this.x = width;
-        this.y = height;
+        this.x = height;
+        this.y = width;
     }
 
     public ArrayList<Vec2d> update(Mission mission){
