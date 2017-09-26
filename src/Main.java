@@ -6,4 +6,5 @@ public class Main {
         Map map = new Map(6, 6);
         World world = new World(map);
     }
+
 }

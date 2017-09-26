@@ -12,10 +12,13 @@ public class Unit {
         this.name = name;
         this.cost = cost;
         currentPos = position;
+        displacement = new Vec2d(1, 0);
     }
 
     public void move() {
-        currentPos.add(displacement);
+
+        currentPos.add(new Vec2d(displacement.col, displacement.row));
+
     }
 
 
@@ -27,32 +30,32 @@ public class Unit {
         (-1, 0) left
          */
         if(turnRight) {
-            if(displacement.x == 0 && displacement.y == -1) {
-                displacement.x = 1;
-                displacement.y = 0;
-            }else if(displacement.x == 1 && displacement.y == 0) {
-                displacement.x = 0;
-                displacement.y = 1;
-            }else if(displacement.x == 0 && displacement.y == 1) {
-                displacement.x = -1;
-                displacement.y = 0;
-            }else if(displacement.x == -1 && displacement.y == 0) {
-                displacement.x = 0;
-                displacement.y = -1;
+            if(displacement.col == 0 && displacement.row == -1) {
+                displacement.col = 1;
+                displacement.row = 0;
+            }else if(displacement.col == 1 && displacement.row == 0) {
+                displacement.col = 0;
+                displacement.row = 1;
+            }else if(displacement.col == 0 && displacement.row == 1) {
+                displacement.col = -1;
+                displacement.row = 0;
+            }else if(displacement.col == -1 && displacement.row == 0) {
+                displacement.col = 0;
+                displacement.row = -1;
             }
         }else {
-            if(displacement.x == 0 && displacement.y == -1) {
-                displacement.x = -1;
-                displacement.y = 0;
-            }else if(displacement.x == -1 && displacement.y == 0) {
-                displacement.x = 0;
-                displacement.y = 1;
-            }else if(displacement.x == 0 && displacement.y == 1) {
-                displacement.x = 1;
-                displacement.y = 0;
-            }else if(displacement.x == 1 && displacement.y == 0) {
-                displacement.x = 0;
-                displacement.y = -1;
+            if(displacement.col == 0 && displacement.row == -1) {
+                displacement.col = -1;
+                displacement.row = 0;
+            }else if(displacement.col == -1 && displacement.row == 0) {
+                displacement.col = 0;
+                displacement.row = 1;
+            }else if(displacement.col == 0 && displacement.row == 1) {
+                displacement.col = 1;
+                displacement.row = 0;
+            }else if(displacement.col == 1 && displacement.row == 0) {
+                displacement.col = 0;
+                displacement.row = -1;
             }
         }
     }
