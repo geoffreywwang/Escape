@@ -31,7 +31,7 @@ public class Interpreter {
         return null;
 
     }
-    public static Mission parseScript( String script){
+    public static Mission parseScript(String script){
         ArrayList<Action> actions = new ArrayList<>();
         String[] arr = script.split("\\\n");
         String[] command = arr[0].split(" ");
@@ -40,7 +40,6 @@ public class Interpreter {
             actions.add(parseLine(arr[i]));
 
         }
-
 
         return new Mission(unit, actions);
     }
