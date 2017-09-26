@@ -32,7 +32,7 @@ public class Main extends JPanel {
         BufferedImage sprite;
         try {
             sprite = ImageIO.read(new File("res/" + name + ".png"));
-            g2.drawImage(sprite, loc.x, loc.y, 32, 32, null);
+            g2.drawImage(sprite, loc.col, loc.row, 32, 32, null);
         }catch(Exception e) {
             System.out.println("File Not Found Loser");
         }
