@@ -1,7 +1,6 @@
 package game.graphics;
 import utilities.*;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -28,10 +27,8 @@ public class Main extends JPanel {
         });
     }
 
-    public void drawSprite(Graphics2D g2, String name, Vec2d loc) {
-        BufferedImage sprite;
+    public void drawSprite(Graphics2D g2, BufferedImage sprite, Vec2d loc) {
         try {
-            sprite = ImageIO.read(new File("res/" + name + ".png"));
             g2.drawImage(sprite, loc.col, loc.row, 32, 32, null);
         }catch(Exception e) {
             System.out.println("File Not Found Loser");
@@ -44,7 +41,8 @@ public class Main extends JPanel {
         g2.setColor(Color.WHITE);
         g2.drawRect(0, 0, 800, 800);
 
-        drawSprite(g2, "singleTree", new Vec2d(400, 400));
+        Animation a = new Animation("minions");
+        a.display(g2);
     }
 
     public static void main(String[] args) {
