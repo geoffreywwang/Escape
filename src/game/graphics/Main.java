@@ -5,6 +5,8 @@ import utilities.*;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.*;
@@ -16,6 +18,14 @@ public class Main extends JPanel {
     static int constanty = 4;
     Sprite s = new Sprite("minions");
     public Main(){
+        Timer timer = new Timer(500, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                s.animate();
+                repaint();
+            }
+        });
+        timer.start();
         addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {
@@ -25,6 +35,14 @@ public class Main extends JPanel {
             public void keyPressed(KeyEvent e) {
                 if(e.getKeyChar() == 'd') {
                     s.turnSprite(true);
+                    repaint();
+                }else if(e.getKeyChar() == 'a') {
+                    s.turnSprite(false);
+                    repaint();
+                }else if(e.getKeyCode() == e.VK_ESCAPE) {
+                    System.exit(0);
+                }else if(e.getKeyChar() == 'w') {
+                    s.move();
                     repaint();
                 }
             }
