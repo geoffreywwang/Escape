@@ -3,6 +3,8 @@ import utilities.*;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.*;
@@ -10,6 +12,14 @@ import java.awt.image.*;
 public class Main extends JPanel {
     Sprite s = new Sprite("minions");
     public Main(){
+        Timer timer = new Timer(500, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                s.animate();
+                repaint();
+            }
+        });
+        timer.start();
         addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {

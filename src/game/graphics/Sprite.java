@@ -8,7 +8,6 @@ import javax.imageio.*;
 public class Sprite {
     private BufferedImage largeImg;
     private BufferedImage[] sprites;
-    private BufferedImage currSprite;
     private int spriteIndex = 0;
     private Vec2d position;
     // 0,1-up, 2,3-down, 4,5-left, 6,7-right
@@ -20,9 +19,6 @@ public class Sprite {
             sprites = split(largeImg);
         } catch (Exception e) {
             System.out.println("Sprite could not be initialized");
-        }
-        if(sprites.length > 0) {
-            currSprite = sprites[spriteIndex];
         }
     }
 
@@ -44,6 +40,26 @@ public class Sprite {
 
     public void display(Graphics2D g2) {
         g2.drawImage(sprites[spriteIndex], position.col, position.row, 32, 32, null);
+    }
+
+    public void animate() {
+        if(spriteIndex == 0) {
+            spriteIndex=1;
+        }else if(spriteIndex == 2) {
+            spriteIndex = 3;
+        }else if(spriteIndex == 4) {
+            spriteIndex = 5;
+        }else if(spriteIndex == 6) {
+            spriteIndex = 7;
+        }else if(spriteIndex == 1) {
+            spriteIndex=0;
+        }else if(spriteIndex == 3) {
+            spriteIndex = 2;
+        }else if(spriteIndex == 5) {
+            spriteIndex = 4;
+        }else if(spriteIndex == 7) {
+            spriteIndex = 6;
+        }
     }
 
     public void turnSprite(boolean turnRight) {
@@ -74,28 +90,20 @@ public class Sprite {
     public void move() {
         if(spriteIndex == 0) {
             position.row -= 32;
-            spriteIndex = 1;
         }else if(spriteIndex == 2) {
             position.row += 32;
-            spriteIndex = 3;
         }else if(spriteIndex == 4) {
             position.col -= 32;
-            spriteIndex = 5;
         }else if(spriteIndex == 6) {
             position.col += 32;
-            spriteIndex = 7;
         }else if(spriteIndex == 1) {
             position.row -= 32;
-            spriteIndex = 0;
         }else if(spriteIndex == 3) {
             position.row += 32;
-            spriteIndex = 2;
         }else if(spriteIndex == 5) {
             position.col -= 32;
-            spriteIndex = 4;
         }else if(spriteIndex == 7) {
             position.col += 32;
-            spriteIndex = 6;
         }
     }
 }
