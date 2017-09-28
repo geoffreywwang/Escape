@@ -20,6 +20,14 @@ public class Main extends JPanel {
                 if(e.getKeyChar() == 'd') {
                     s.turnSprite(true);
                     repaint();
+                }else if(e.getKeyChar() == 'a') {
+                    s.turnSprite(false);
+                    repaint();
+                }else if(e.getKeyCode() == e.VK_ESCAPE) {
+                    System.exit(0);
+                }else if(e.getKeyChar() == 'w') {
+                    s.move();
+                    repaint();
                 }
             }
 

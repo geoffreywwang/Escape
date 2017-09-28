@@ -16,9 +16,7 @@ public class Unit {
     }
 
     public void move() {
-
         currentPos.add(new Vec2d(displacement.col, displacement.row));
-
     }
 
 
