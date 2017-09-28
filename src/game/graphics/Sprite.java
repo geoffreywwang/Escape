@@ -39,7 +39,7 @@ public class Sprite {
     }
 
     public void display(Graphics2D g2) {
-        g2.drawImage(sprites[spriteIndex], position.col, position.row, 32, 32, null);
+        g2.drawImage(sprites[spriteIndex], position.col, position.row, 96, 96, null);
     }
 
     public void animate() {
