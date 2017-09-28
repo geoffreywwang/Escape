@@ -6,9 +6,9 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.*;
-import java.io.*;
 
 public class Main extends JPanel {
+    Sprite s = new Sprite("minions");
     public Main(){
         addKeyListener(new KeyListener() {
             @Override
@@ -17,7 +17,10 @@ public class Main extends JPanel {
 
             @Override
             public void keyPressed(KeyEvent e) {
-
+                if(e.getKeyChar() == 'd') {
+                    s.turnSprite(true);
+                    repaint();
+                }
             }
 
             @Override
@@ -27,22 +30,13 @@ public class Main extends JPanel {
         });
     }
 
-    public void drawSprite(Graphics2D g2, BufferedImage sprite, Vec2d loc) {
-        try {
-            g2.drawImage(sprite, loc.col, loc.row, 32, 32, null);
-        }catch(Exception e) {
-            System.out.println("File Not Found Loser");
-        }
-    }
-
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D)g;
         g2.setColor(Color.WHITE);
         g2.drawRect(0, 0, 800, 800);
 
-        Animation a = new Animation("minions");
-        a.display(g2);
+        s.display(g2);
     }
 
     public static void main(String[] args) {
