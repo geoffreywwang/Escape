@@ -31,14 +31,15 @@ public class Interpreter {
         return null;
 
     }
-    public static Mission parseScript(String script){
+    public static Mission parseScript(String script, Vec2d start){
         ArrayList<Action> actions = new ArrayList<>();
         String[] arr = script.split("\\\n");
         String[] command = arr[0].split(" ");
-        Unit unit = new Unit(command[1], new Vec2d(0,0), 1);
+        Unit unit = new Unit(command[1], start, 1);
         for (int i = 1; i < arr.length; i++) {
-            actions.add(parseLine(arr[i]));
-
+            if (!arr[i].equals("")){
+                actions.add(parseLine(arr[i]));
+            }
         }
 
         return new Mission(unit, actions);

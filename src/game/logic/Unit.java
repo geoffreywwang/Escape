@@ -1,5 +1,9 @@
 package game.logic;
+import game.graphics.Sprite;
 import utilities.*;
+
+import static game.graphics.Pen.OFFSET;
+import static game.graphics.Pen.TILE_SIZE;
 
 public class Unit {
     public static boolean TURN_RIGHT = true, TURN_LEFT = false;
@@ -8,14 +12,22 @@ public class Unit {
     private Vec2d currentPos, displacement;
     public int cost;
 
+    private Sprite sprite;
+
     public Unit(String name, Vec2d position, int cost) {
         this.name = name;
         this.cost = cost;
         currentPos = position;
         displacement = new Vec2d(1, 0);
+        sprite = new Sprite("minions",new Vec2d(currentPos.col * TILE_SIZE + OFFSET, currentPos.row * TILE_SIZE + OFFSET));
+    }
+
+    public Sprite getSprite() {
+        return sprite;
     }
 
     public void move() {
+        sprite.move();
         currentPos.add(new Vec2d(displacement.col, displacement.row));
     }
 
@@ -27,6 +39,7 @@ public class Unit {
         (1, 0) right
         (-1, 0) left
          */
+        sprite.turnSprite(turnRight);
         if(turnRight) {
             if(displacement.col == 0 && displacement.row == -1) {
                 displacement.col = 1;
@@ -41,6 +54,7 @@ public class Unit {
                 displacement.col = 0;
                 displacement.row = -1;
             }
+
         }else {
             if(displacement.col == 0 && displacement.row == -1) {
                 displacement.col = -1;
