@@ -5,15 +5,16 @@ import java.awt.image.*;
 import java.io.*;
 import javax.imageio.*;
 
+import static game.graphics.Pen.TILE_SIZE;
+
 public class Sprite {
     private BufferedImage largeImg;
     private BufferedImage[] sprites;
-    private int spriteIndex = 0;
-    private Vec2d position;
-    // 0,1-up, 2,3-down, 4,5-left, 6,7-right
+    private int spriteIndex = 6;
+    private Vec2d position; // 0,1-up, 2,3-down, 4,5-left, 6,7-right
 
-    public Sprite(String name) {
-        position = new Vec2d(400, 400);
+    public Sprite(String name, Vec2d startingPosition) {
+        position = new Vec2d(startingPosition.col, startingPosition.row);
         try {
             largeImg = ImageIO.read(new File("res/" + name + ".png"));
             sprites = split(largeImg);
@@ -39,7 +40,7 @@ public class Sprite {
     }
 
     public void display(Graphics2D g2) {
-        g2.drawImage(sprites[spriteIndex], position.col, position.row, 96, 96, null);
+        g2.drawImage(sprites[spriteIndex], position.col, position.row, TILE_SIZE, TILE_SIZE, null);
     }
 
     public void animate() {
@@ -89,21 +90,21 @@ public class Sprite {
     // USES SPRITE INDEX
     public void move() {
         if(spriteIndex == 0) {
-            position.row -= 32;
+            position.row -= TILE_SIZE;
         }else if(spriteIndex == 2) {
-            position.row += 32;
+            position.row += TILE_SIZE;
         }else if(spriteIndex == 4) {
-            position.col -= 32;
+            position.col -= TILE_SIZE;
         }else if(spriteIndex == 6) {
-            position.col += 32;
+            position.col += TILE_SIZE;
         }else if(spriteIndex == 1) {
-            position.row -= 32;
+            position.row -= TILE_SIZE;
         }else if(spriteIndex == 3) {
-            position.row += 32;
+            position.row += TILE_SIZE;
         }else if(spriteIndex == 5) {
-            position.col -= 32;
+            position.col -= TILE_SIZE;
         }else if(spriteIndex == 7) {
-            position.col += 32;
+            position.col += TILE_SIZE;
         }
     }
 }
