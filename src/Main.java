@@ -1,3 +1,4 @@
+import com.sun.corba.se.impl.orb.ParserTable;
 import game.graphics.Pen;
 import game.graphics.Sprite;
 import game.logic.*;
@@ -113,20 +114,23 @@ public class Main extends JPanel {
     }
 
     public static void main(String[] args) {
-        String[] options = {"Expert", "Hard", "Medium", "Easy"};
-        int option = JOptionPane.showOptionDialog(null, "Easy - 6x5 (No Clouds)\nMedium - 6x5 (With Clouds)\nHard - 8x7 (No Clouds)\nExpert - 8x7 (With Clouds)",
+        String[] options = {"Insane", "Expert", "Hard", "Medium", "Easy"};
+        int option = JOptionPane.showOptionDialog(null, "Easy - 6x5 (No Clouds)\nMedium - 8x7 (No Clouds)\nHard - 6x5 (With Clouds)\nExpert - 8x7 (With Clouds)\nInsane - 24x20 (With Clouds)",
                 "Escape - Haydn, Kanming, Andy, and Geoffrey",
                 JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
-        if(option == 0){
+        if (option  == 0 ){
+            MAP_SIZE = new Vec2d(24,20);
+            TILE_SIZE = 32;
+        } else if(option == 1){
             MAP_SIZE = new Vec2d(8,7);
-            TILE_SIZE = 64;
-        }else if(option == 1){
-            MAP_SIZE = new Vec2d(8,7);
-            REVEAL_MAP = true;
             TILE_SIZE = 64;
         }else if(option == 2){
             MAP_SIZE = new Vec2d(6,5);
             TILE_SIZE = 72;
+        }else if(option == 3){
+            MAP_SIZE = new Vec2d(8,7);
+            REVEAL_MAP = true;
+            TILE_SIZE = 64;
         }else{ // Easy
             MAP_SIZE = new Vec2d(6,5);
             REVEAL_MAP = true;
