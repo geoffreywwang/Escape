@@ -96,11 +96,11 @@ public class Map {
                 }
                 tempUnit.move();
 
-                if (tempUnit.getCurrentPos().row >= mapArray.length) {
+                if (tempUnit.getCurrentPos().col >= mapArray[0].length) {
                     return null;
                 } else if (tempUnit.getCurrentPos().col <= -1) {
                     return null;
-                } else if (tempUnit.getCurrentPos().row >= mapArray[0].length) {
+                } else if (tempUnit.getCurrentPos().row >= mapArray.length) {
                     return null;
                 } else if (tempUnit.getCurrentPos().row <= -1) {
                     return null;

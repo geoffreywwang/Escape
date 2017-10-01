@@ -57,6 +57,8 @@ public class Main extends JPanel {
                         hasWon = true;
                         clockTimer.stop();
                     }
+//                    currentMission.getUnit().getCurrentPos().row == world.getMap().getStopTile().row
+//                            && currentMission.getUnit().getCurrentPos().col == world.getMap().getStopTile().col
 
                     if(!hasWon){
                         if(currentMission.getActions().size() > 0){
