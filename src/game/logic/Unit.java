@@ -14,11 +14,23 @@ public class Unit {
 
     private Sprite sprite;
 
-    public Unit(String name, Vec2d position, int cost) {
+    public Unit(String name, Vec2d position) {
         this.name = name;
-        this.cost = cost;
+        switch (name) {
+            case "normal":
+                cost = 1;
+                break;
+            case "scout":
+                cost = 8;
+                break;
+            case "champ":
+                cost = 20;
+                break;
+        }
+        System.out.println(cost);
         currentPos = position;
         displacement = new Vec2d(1, 0);
+
         sprite = new Sprite("minions",new Vec2d(currentPos.col * TILE_SIZE + OFFSET, currentPos.row * TILE_SIZE + OFFSET));
     }
 

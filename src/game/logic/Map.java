@@ -8,6 +8,7 @@ import utilities.LogicUtil;
 import utilities.Vec2d;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Map {
 
@@ -70,10 +71,21 @@ public class Map {
         Unit tempUnit = mission.getUnit();
 
         Action temp = actionList.remove(0);
-
+        if (temp == null) {
+            return mission;
+        }
         switch (temp.getActionType()) {
             case TURN_RIGHT:
-                tempUnit.turn(Unit.TURN_RIGHT); //turn right is true
+//                if (Objects.equals(tempUnit.getName(), "scout")){
+//                    Vec2d displaceStore = tempUnit.getDisplacement();
+//                    tempUnit.turn(Unit.TURN_RIGHT); //turn right is true
+//                    displaceStore.add(tempUnit.getDisplacement());
+//                    setViewableMap(new Vec2d(tempUnit.getCurrentPos().col + displaceStore.col, tempUnit.getCurrentPos().row + displaceStore.row));
+//                } else {
+                    tempUnit.turn(Unit.TURN_RIGHT); // turn right is true
+//                }
+
+
                 return mission;
             case TURN_LEFT:
                 tempUnit.turn(Unit.TURN_LEFT); //turn right is true
@@ -94,7 +106,23 @@ public class Map {
                     return null;
                 }
 
-                setViewableMap(tempUnit.getCurrentPos());
+                if (Objects.equals(mission.getUnit().getName(), "scout")) {
+                    if (mission.getUnit().getDisplacement().row == 0) {//moving left right
+                        setViewableMap(tempUnit.getCurrentPos());
+                        if (tempUnit.getCurrentPos().row < mapArray.length-1)
+                            setViewableMap(new Vec2d(tempUnit.getCurrentPos().col, tempUnit.getCurrentPos().row+1));
+                        if (tempUnit.getCurrentPos().row > 0)
+                            setViewableMap(new Vec2d(tempUnit.getCurrentPos().col, tempUnit.getCurrentPos().row-1));
+                    } else if (mission.getUnit().getDisplacement().col == 0) {//moving up down
+                        setViewableMap(tempUnit.getCurrentPos());
+                        if (tempUnit.getCurrentPos().col < mapArray[0].length-1)
+                            setViewableMap(new Vec2d(tempUnit.getCurrentPos().col+1, tempUnit.getCurrentPos().row));
+                        if (tempUnit.getCurrentPos().col > 0)
+                            setViewableMap(new Vec2d(tempUnit.getCurrentPos().col-1, tempUnit.getCurrentPos().row));
+                    }
+                } else {
+                    setViewableMap(tempUnit.getCurrentPos());
+                }
 
                 int col = tempUnit.getCurrentPos().col;
                 int row = tempUnit.getCurrentPos().row;

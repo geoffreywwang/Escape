@@ -16,6 +16,7 @@ import java.awt.image.*;
 import java.io.BufferedReader;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Objects;
 
 import static game.graphics.Pen.BOARDER_TILE_COUNT;
 import static game.graphics.Pen.OFFSET;
@@ -27,7 +28,8 @@ public class Main extends JPanel {
 
     private Timer globalTimer, clockTimer;
     private int frameIndex;
-
+    public int score = 0;
+    private boolean scoreTimer = true;
     private World world;
     private Mission currentMission;
     private boolean hasWon = false, gameStarted = false;
@@ -51,7 +53,7 @@ public class Main extends JPanel {
                 if(currentMission != null){
                     currentMission.getUnit().getSprite().animate();
 
-                    if(currentMission.getUnit().getCurrentPos().row == world.getMap().getStopTile().row &&currentMission.getUnit().getCurrentPos().col == world.getMap().getStopTile().col){
+                    if(Objects.equals(currentMission.getUnit().getName(), "champ") && currentMission.getUnit().getCurrentPos().row == world.getMap().getStopTile().row &&currentMission.getUnit().getCurrentPos().col == world.getMap().getStopTile().col){
                         hasWon = true;
                         clockTimer.stop();
                     }
@@ -145,7 +147,7 @@ public class Main extends JPanel {
         textWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         textWindow.setBounds(OFFSET * 2 + MAP_SIZE.col * TILE_SIZE,0,500,OFFSET * 2 + MAP_SIZE.row * TILE_SIZE); //(x, y, w, h)
 
-        JTextArea textArea = new JTextArea("Unit unit = new Unit();\n\nunit.move(3);\nunit.turn(right);");
+        JTextArea textArea = new JTextArea("Unit unit = new Unit(normal/scout/champ);\n\nunit.move(3);\nunit.turn(right);");
         textArea.setFont(new Font("Roboto", Font.PLAIN, 18));
 
         JScrollPane areaScrollPane = new JScrollPane(textArea);
@@ -181,11 +183,40 @@ public class Main extends JPanel {
             panel.world.getMap().reveal();
         });
 
+        JButton instructionsButton = new JButton("Instructions");
+        instructionsButton.setSize(100,50);
+        instructionsButton.addActionListener(e -> {
+            JFrame instructionPanel = new JFrame("Instructions");
+            instructionPanel.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            instructionPanel.setSize(400,400);
+
+
+            JTextArea instructionsText = new JTextArea("Unit unit = new Unit(normal/scout/champ);" +
+                    "\nThis is character control." +
+                    "\n\nPick normal scout or champ. " +
+                    "\nNormal is the basic character," +
+                    "\nwhich walks around revealing land." +
+                    "\nScout reveals more than normal," +
+                    "\nbut costs more." +
+                    "\nChamp is the same as Normal," +
+                    "\nbut you can only win with Champ." +
+                    "\n\nunit.move(3); --> moving code" +
+                    "\nunit.turn(right); --> turning code");
+            instructionsText.setFont(new Font("Roboto", Font.PLAIN, 18));
+
+            instructionPanel.add(instructionsText);
+
+            instructionPanel.setVisible(true);
+
+        });
+
+
 
         textWindow.setLayout(new FlowLayout(FlowLayout.CENTER));
         textWindow.add(areaScrollPane);
         textWindow.add(runScriptButton);
         textWindow.add(revealButton);
+        textWindow.add(instructionsButton);
         textWindow.add(infoLabel);
         textWindow.setVisible(true);
     }
@@ -197,19 +228,32 @@ public class Main extends JPanel {
 
 
         Pen.drawMapWithBorder(world.getMap(),g2);
-        if(currentMission != null) {
+        if(currentMission != null && scoreTimer) {
             currentMission.getUnit().getSprite().display(g2);
+            score += currentMission.getUnit().cost;
+            scoreTimer = false;
+        } else if (currentMission != null){
+            currentMission.getUnit().getSprite().display(g2);
+        } else {
+            scoreTimer = true;
         }
 
-        if(hasWon) {
+        if (!hasWon) {
+            g2.setFont(new Font("Roboto", Font.BOLD, 24));
+            g2.setColor(Color.ORANGE);
+//        g2.drawString(timeElapsed + " sec(s)", 10, OFFSET * 2 + MAP_SIZE.row * TILE_SIZE - 30);
+            g2.drawString(String.valueOf(score), 10, OFFSET * 2 + MAP_SIZE.row * TILE_SIZE - 30);
+        } else {
             g2.setFont(new Font("Roboto", Font.BOLD, 96));
             g2.setColor(Color.ORANGE);
             g2.drawString("YOU WIN!!!!", 100, 100);
+            g2.setFont(new Font("Roboto", Font.BOLD, 50));
+            g2.drawString("YOUR SCORE WAS" + " " + score, 100, OFFSET * 2 + MAP_SIZE.row * TILE_SIZE - 50);
+
         }
 
-        g2.setFont(new Font("Roboto", Font.BOLD, 24));
-        g2.setColor(Color.ORANGE);
-        g2.drawString(timeElapsed + " sec(s)", 10, OFFSET * 2 + MAP_SIZE.row * TILE_SIZE - 30);
+
+
     }
 
 

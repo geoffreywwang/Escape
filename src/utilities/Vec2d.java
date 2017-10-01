@@ -12,4 +12,5 @@ public class Vec2d {
         col += other.col;
         row += other.row;
     }
+
 }
