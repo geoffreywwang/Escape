@@ -29,6 +29,7 @@ public class Main extends JPanel {
 
     private Timer globalTimer, clockTimer;
     private int frameIndex;
+    private static int buttonScore = 0;
     public int score = 0;
     private boolean scoreTimer = true;
     private World world;
@@ -187,6 +188,7 @@ public class Main extends JPanel {
         revealButton.setSize(100,50);
         revealButton.addActionListener(e -> {
             panel.world.getMap().reveal();
+            setButtonScore(500);
         });
 
         JButton instructionsButton = new JButton("Instructions");
@@ -248,13 +250,14 @@ public class Main extends JPanel {
             g2.setFont(new Font("Roboto", Font.BOLD, 24));
             g2.setColor(Color.ORANGE);
 //        g2.drawString(timeElapsed + " sec(s)", 10, OFFSET * 2 + MAP_SIZE.row * TILE_SIZE - 30);
-            g2.drawString("score: " + score, 10, OFFSET * 2 + MAP_SIZE.row * TILE_SIZE - 30);
+
+            g2.drawString("score: " + (score + getButtonScore()), 10, OFFSET * 2 + MAP_SIZE.row * TILE_SIZE - 30);
         } else {
             g2.setFont(new Font("Roboto", Font.BOLD, 96));
             g2.setColor(Color.ORANGE);
             g2.drawString("YOU WIN!!!!", 100, 100);
             g2.setFont(new Font("Roboto", Font.BOLD, 50));
-            g2.drawString("YOUR SCORE WAS" + " " + score, 100, OFFSET * 2 + MAP_SIZE.row * TILE_SIZE - 50);
+            g2.drawString("YOUR SCORE WAS " + (score + getButtonScore()), 100, OFFSET * 2 + MAP_SIZE.row * TILE_SIZE - 50);
 
         }
 
@@ -262,5 +265,11 @@ public class Main extends JPanel {
 
     }
 
+    public static int getButtonScore() {
+        return buttonScore;
+    }
 
+    public static void setButtonScore(int x) {
+        buttonScore = x;
+    }
 }
