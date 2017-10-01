@@ -248,7 +248,7 @@ public class Main extends JPanel {
             g2.setFont(new Font("Roboto", Font.BOLD, 24));
             g2.setColor(Color.ORANGE);
 //        g2.drawString(timeElapsed + " sec(s)", 10, OFFSET * 2 + MAP_SIZE.row * TILE_SIZE - 30);
-            g2.drawString(String.valueOf(score), 10, OFFSET * 2 + MAP_SIZE.row * TILE_SIZE - 30);
+            g2.drawString("score: " + score, 10, OFFSET * 2 + MAP_SIZE.row * TILE_SIZE - 30);
         } else {
             g2.setFont(new Font("Roboto", Font.BOLD, 96));
             g2.setColor(Color.ORANGE);
